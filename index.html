@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gen Z Protests Around the World</title>
+<style>
+  * { box-sizing: border-box; font-family: "Poppins", sans-serif; }
+
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #1a1a1a, #330000);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  /* --- INTRO SCREEN (Gen Z simplifié) --- */
+  .intro {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, #1a1a1a, #330000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    animation: introFadeOut 1s ease forwards;
+    animation-delay: 4.5s;
+  }
+
+  .introTitle {
+    font-size: 6rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    position: relative;
+    color: black;
+    animation: zoomZ 4.5s ease forwards;
+  }
+
+  .introTitle .gen { color: black; }
+  .introTitle .z { color: red; }
+
+  @keyframes zoomZ {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(4); opacity: 1; }
+    100% { transform: scale(15); opacity: 0; }
+  }
+
+  @keyframes introFadeOut { to { opacity: 0; visibility: hidden; } }
+
+  /* --- MAIN CONTENT --- */
+  .content { opacity: 0; animation: showContent 1s ease forwards; animation-delay: 5s; }
+
+  @keyframes showContent { to { opacity: 1; } }
+
+  h1.mainTitle {
+    font-size: 2.7rem;
+    margin-top: 40px;
+    text-align: center;
+    color: red;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 0 #000, 4px 4px 0 #330000, 6px 6px 0 #660000;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding: 60px;
+    width: 90%;
+    max-width: 1100px;
+    justify-items: center;
+  }
+
+  .country {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 280px;
+  }
+
+  .country img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .country:hover img {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+  }
+
+  .country:active { transform: scale(0.95) rotate(2deg); }
+
+  .country h2 { margin-top: 12px; font-size: 1.6rem; color: red; }
+
+  /* --- POPUP --- */
+  .popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+    padding: 20px;
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+  .popup video, .popup img {
+    width: 90%;
+    max-width: 650px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+  }
+
+  /* --- TITLE & TEXT ANIMATION AGRANDIS --- */
+  @keyframes growTitle {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1.5); opacity: 1; }
+  }
+
+  @keyframes growText {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1.4); opacity: 1; }
+  }
+
+  .popupTitle {
+    transform: scale(0.8);
+    opacity: 0;
+    font-size: 2rem;
+    color: red;
+    margin-top: 20px;
+  }
+
+  .popupText {
+    transform: scale(0.8);
+    opacity: 0;
+    font-size: 1.25rem;
+    margin-top: 15px;
+    color: #ff6666;
+    max-width: 750px;
+  }
+
+  /* --- FLAG ZOOM ANIMATION --- */
+  @keyframes flagZoom {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+
+  .close-btn {
+    margin-top: 25px;
+    background: red;
+    color: black;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .close-btn:hover { background: darkred; }
+
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 30px; } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; gap: 20px; } }
+</style>
+</head>
+<body>
+
+<!-- INTRO ANIMATION -->
+<div class="intro">
+  <h1 class="introTitle">
+    <span class="gen">Gen</span> <span class="z">Z</span>
+  </h1>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+  <h1 class="mainTitle">🌍 Gen Z Protests Around the World 🌍</h1>
+
+  <div class="grid">
+    <div class="country" onclick="showPopup(this,'morocco')">
+      <img src="https://flagcdn.com/w320/ma.png" alt="Morocco">
+      <h2>Morocco</h2>
+    </div>
+    <div class="country" onclick="showPopup(this,'nepal')">
+      <img src="https://flagcdn.com/w320/np.png" alt="Nepal">
+      <h2>Nepal</h2>
+    </div>
+    <div class="country" onclick="showPopup(this,'madagascar')">
+      <img src="https://flagcdn.com/w320/mg.png" alt="Madagascar">
+      <h2>Madagascar</h2>
+    </div>
+    <div class="country" onclick="showPopup(this,'srilanka')">
+      <img src="https://flagcdn.com/w320/lk.png" alt="Sri Lanka">
+      <h2>Sri Lanka</h2>
+    </div>
+    <div class="country" onclick="showPopup(this,'bangladesh')">
+      <img src="https://flagcdn.com/w320/bd.png" alt="Bangladesh">
+      <h2>Bangladesh</h2>
+    </div>
+    <div class="country" onclick="showPopup(this,'peru')">
+      <img src="https://flagcdn.com/w320/pe.png" alt="Peru">
+      <h2>Peru</h2>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP -->
+<div id="popup" class="popup">
+  <video id="popupVideo" controls></video>
+  <h2 id="popupTitle" class="popupTitle"></h2>
+  <p id="popupText" class="popupText"></p>
+  <button class="close-btn" onclick="closePopup()">Close</button>
+</div>
+
+<script>
+  const data = {
+    morocco: { video: "https://videos.pexels.com/video-files/856171/856171-hd_1920_1080_25fps.mp4", text: "In Morocco, Gen Z gathered to demand better education, job opportunities, and climate action. Their unity inspired hope for the future." },
+    nepal: { video: "https://videos.pexels.com/video-files/856178/856178-hd_1920_1080_25fps.mp4", text: "In Nepal, young people marched peacefully for political transparency and equality. They used social media to spread awareness." },
+    madagascar: { video: "https://videos.pexels.com/video-files/856179/856179-hd_1920_1080_25fps.mp4", text: "Madagascar’s Gen Z protested against environmental destruction, asking for protection of the island’s forests and wildlife." },
+    srilanka: { video: "https://videos.pexels.com/video-files/856177/856177-hd_1920_1080_25fps.mp4", text: "In Sri Lanka, young citizens demanded fair wages and stronger social support during hard economic times." },
+    bangladesh: { video: "https://videos.pexels.com/video-files/856170/856170-hd_1920_1080_25fps.mp4", text: "Bangladeshi youth marched for climate justice and women’s safety, showing courage and determination for change." },
+    peru: { video: "https://videos.pexels.com/video-files/856176/856176-hd_1920_1080_25fps.mp4", text: "In Peru, Gen Z stood against corruption, demanding honesty and justice from their leaders." }
+  };
+
+  function showPopup(element, country) {
+    const popup = document.getElementById("popup");
+    const video = document.getElementById("popupVideo");
+    const text = document.getElementById("popupText");
+    const title = document.getElementById("popupTitle");
+
+    video.src = data[country].video;
+    text.textContent = data[country].text;
+    title.textContent = country.charAt(0).toUpperCase() + country.slice(1);
+
+    // Reset animations
+    title.style.animation = 'none';
+    text.style.animation = 'none';
+    element.querySelector('img').style.animation = 'none';
+
+    void title.offsetWidth;
+    void text.offsetWidth;
+    void element.querySelector('img').offsetWidth;
+
+    // Appliquer animations agrandies
+    title.style.animation = 'growTitle 0.6s ease forwards';
+    text.style.animation = 'growText 0.6s ease 0.1s forwards';
+    element.querySelector('img').style.animation = 'flagZoom 0.6s ease forwards';
+
+    popup.style.display = "flex";
+    video.play();
+  }
+
+  function closePopup() {
+    const popup = document.getElementById("popup");
+    const video = document.getElementById("popupVideo");
+    popup.style.display = "none";
+    video.pause();
+    video.currentTime = 0;
+  }
+</script>
+
+</body>
+</html>
