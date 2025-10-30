@@ -15,10 +15,10 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
-  /* --- INTRO SCREEN --- */
+  /* --- INTRO --- */
   .intro {
     position: fixed;
     inset: 0;
@@ -51,24 +51,49 @@
   @keyframes introFadeOut { to { opacity: 0; visibility: hidden; } }
 
   /* --- MAIN CONTENT --- */
-  .content { opacity: 0; animation: showContent 1s ease forwards; animation-delay: 5s; }
+  .content { 
+    opacity: 0; 
+    animation: showContent 1s ease forwards; 
+    animation-delay: 5s; 
+    text-align: center;
+  }
 
   @keyframes showContent { to { opacity: 1; } }
 
   h1.mainTitle {
     font-size: 2.7rem;
     margin-top: 40px;
-    text-align: center;
     color: red;
     letter-spacing: 1px;
     text-shadow: 2px 2px 0 #000, 4px 4px 0 #330000, 6px 6px 0 #660000;
   }
 
+  /* --- GEN Z DEFINITION --- */
+  .definition {
+    font-size: 1.3rem;
+    max-width: 800px;
+    color: #ffcccc;
+    margin: 10px auto 50px;
+    line-height: 1.8;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1s ease forwards;
+    animation-delay: 6s;
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* --- GRID --- */
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
-    padding: 60px;
+    padding: 40px;
     width: 90%;
     max-width: 1100px;
     justify-items: center;
@@ -114,7 +139,6 @@
 
   @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 
-  /* --- VIDEO RECADRÉ --- */
   .video-container {
     width: 90%;
     max-width: 650px;
@@ -122,7 +146,6 @@
     overflow: hidden;
     border-radius: 15px;
     box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
-    margin: 0 auto;
   }
 
   .video-container iframe {
@@ -131,7 +154,6 @@
     border: 0;
   }
 
-  /* --- TITLE & TEXT ANIMATION --- */
   @keyframes growTitle { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1.5); opacity: 1; } }
   @keyframes growText { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1.4); opacity: 1; } }
 
@@ -159,6 +181,13 @@
 <!-- MAIN CONTENT -->
 <div class="content">
   <h1 class="mainTitle">🌍 Gen Z Protests Around the World 🌍</h1>
+
+  <p class="definition">
+    Generation Z — often called “Gen Z” — includes people born roughly between 1997 and 2012. 
+    They are the first true digital generation, deeply connected through technology, social media, 
+    and global issues. Around the world, Gen Z has raised its voice for justice, climate action, and equality.
+  </p>
+
   <div class="grid">
     <div class="country" onclick="showPopup(this,'morocco')">
       <img src="https://flagcdn.com/w320/ma.png" alt="Morocco">
